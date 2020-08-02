@@ -89,7 +89,7 @@ CommLoggerObject::~CommLoggerObject(void)
     this->mNlines = 0;
 }
 
-void CommLoggerObject::vlogout(int level, const char * fmt, va_list ap)
+void CommLoggerObject::vlogout(int level, const char * fmt, va_list ap)
 {
     COMM_ASSERT_RETURN(level >= this->mCurLv && fmt, ;);
 
