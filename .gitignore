@@ -33,3 +33,6 @@
 
 # Project files
 pjtfs/*
+
+# Build files
+build/*
