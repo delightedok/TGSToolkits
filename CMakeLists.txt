@@ -35,7 +35,7 @@ endif()
 include(cmake/CMakeUtils.cmake)
 
 # Provides an option that the user can optionally select.
-option(ENABLE_SHARED "Build shared library." ON)
+option(ENABLE_SHARED "Build shared library." OFF)  # TODO: Error when creating TESTERs
 option(ENABLE_STATIC "Build static library." ON)
 option(ENABLE_STRICT "Build with strict compile options." ON)
 option(EXPORT_SORTS "Compile codes about sorts or NOT." ON)
@@ -102,3 +102,4 @@ include_directories(
 # Add Sub-Directories
 add_subdirectory(inc)
 add_subdirectory(src)
+add_subdirectory(testers)

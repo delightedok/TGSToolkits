@@ -13,4 +13,8 @@
 #define COMM_UNLOCK(L) (L).unlock()
 #endif
 
+#ifndef COMM_ARRAY_ELEM
+#define COMM_ARRAY_ELEM(array, elemSize, i) (((char *)(array)) + (elemSize) * (i))
+#endif
+
 #endif
