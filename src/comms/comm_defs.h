@@ -1,6 +1,8 @@
 #ifndef __COMMS_COMM_DEFS_H_
 #define __COMMS_COMM_DEFS_H_
 
+#include <tgstk_comms.h>
+
 #ifndef COMM_ASSERT_RETURN
 #define COMM_ASSERT_RETURN(cond, retVal) do { if (!(cond)) return retVal; } while (0)
 #endif

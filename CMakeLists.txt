@@ -35,8 +35,8 @@ endif()
 include(cmake/CMakeUtils.cmake)
 
 # Provides an option that the user can optionally select.
-option(ENABLE_SHARED "Build shared library." OFF)  # TODO: Error when creating TESTERs
-option(ENABLE_STATIC "Build static library." ON)
+option(ENABLE_SHARED "Build shared library." ON)
+option(ENABLE_STATIC "Build static library." OFF)
 option(ENABLE_STRICT "Build with strict compile options." ON)
 option(EXPORT_SORTS "Compile codes about sorts or NOT." ON)
 

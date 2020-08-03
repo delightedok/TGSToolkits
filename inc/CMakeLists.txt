@@ -3,6 +3,7 @@ if(EXPORT_SORTS)
 endif()
 
 set(TGSTK_HEADER_FILES_H
+    tgstk_comms.h
     ${TGSTK_COMMS_HEADER_FILES_H}
 )
 

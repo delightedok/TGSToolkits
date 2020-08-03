@@ -4,10 +4,10 @@
 #define THIS_FILE "bubble_sort.cpp"
 #define LOG_TAG "SORTS-BUBBLE"
 
-SortBubbleObject::SortBubbleObject(SortVTable & vTable) : SortObject(vTable)
+TGSTK_EXPORT SortBubbleObject::SortBubbleObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-int SortBubbleObject::sort(void * objs, int elemSize, int size, SortType type)
+TGSTK_EXPORT int SortBubbleObject::sort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 
