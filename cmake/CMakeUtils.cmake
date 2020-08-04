@@ -43,3 +43,7 @@ macro(add_head_foreach OUT_FILES head)
         list(APPEND ${OUT_FILES} ${o_${a}})
     endforeach()
 endmacro()
+
+macro(get_file_basename basename filename)
+    STRING( REGEX REPLACE "^/?([^/]*/)*([^/]*)\\..*$" "\\2" ${basename} "${filename}" )
+endmacro()
