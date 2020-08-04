@@ -18,7 +18,7 @@ TGSTK_EXPORT int SortCocktailShakerObject::sort(void * objs, int elemSize, int s
     {
         if (i % 2)  // odd
         {
-            for (j = (i / 2 + 1); j < (size - i / 2 + 1) && !ret; j++)
+            for (j = (i / 2 + 1); j < (size - i / 2) && !ret; j++)
             {
                 rc = this->onCompare(COMM_ARRAY_ELEM(objs, elemSize, j - 1), COMM_ARRAY_ELEM(objs, elemSize, j));
                 switch (type)
@@ -53,7 +53,7 @@ TGSTK_EXPORT int SortCocktailShakerObject::sort(void * objs, int elemSize, int s
             }
         } else  // even
         {
-            for (j = (size - i / 2 - 1); j > i / 2 && !ret; j--)
+            for (j = (size - i / 2 - 1); j >= i / 2 && !ret; j--)
             {
                 rc = this->onCompare(COMM_ARRAY_ELEM(objs, elemSize, j - 1), COMM_ARRAY_ELEM(objs, elemSize, j));
                 switch (type)
