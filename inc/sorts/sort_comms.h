@@ -1,6 +1,8 @@
 #ifndef __SORT_SORT_COMMS_H_
 #define __SORT_SORT_COMMS_H_
 
+#include <string>
+
 typedef int (* Func_sort1)(void * obj1, void * obj2);
 typedef int (* Func_sort2)(void * obj1, void * obj2);
 typedef void * (* Func_sort3)(void * obj);
@@ -10,8 +12,15 @@ class SortStatistic
 {
 public:
     SortStatistic(void);
-    void display(void);
+    std::string get_statistic(void);
+    void reset(void);
+    void addExchange(void);
+    void addAlloc(void);
+    void addCompare(void);
 private:
+    long long mNExchanges;  // The times of exchange
+    long long mNAllocs;  // The times of alloc memory
+    long long mNCompares;  // The times of alloc memory
 };
 
 struct SortVTable
@@ -31,8 +40,8 @@ enum SortType
 class SortObject
 {
 public:
-    virtual int sort(void * objs, int elemSize, int size, SortType type) = 0;
-    void statistic_display(void);  // display the statistic
+    virtual int sort(void * objs, int elemSize, int size, SortType type);
+    TGSTK_EXPORT std::string get_statistic(void);  // Get the display string of statistic
 protected:
     SortObject(SortVTable & vTable);
     int onCompare(void * obj1, void * obj2);

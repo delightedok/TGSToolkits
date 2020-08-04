@@ -1,5 +1,9 @@
 #include "../comms/tester_comms.h"
 #include <sorts/cocktail_shaker_sort.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 #define THIS_FILE "tester_cocktail_shaker_sorts.cpp"
 #define LOG_TAG "TESTER-COCKTAIL_SHAKER-SORTS"
@@ -61,6 +65,7 @@ int main(int argc, char * args[])
     {
         tester_logd(LOG_TAG, THIS_FILE, "a[%d]: %d", i, a[i]);
     }
+    tester_logd(LOG_TAG, THIS_FILE, "Statistic: %s", obj.get_statistic().c_str());
     tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
 
     obj.sort(b, sizeof(b[0]), sizeof(b) / sizeof(b[0]), emSortDesc);
@@ -68,6 +73,7 @@ int main(int argc, char * args[])
     {
         tester_logd(LOG_TAG, THIS_FILE, "b[%d]: %d", i, b[i]);
     }
+    tester_logd(LOG_TAG, THIS_FILE, "Statistic: %s", obj.get_statistic().c_str());
     tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
     return 0;
 }

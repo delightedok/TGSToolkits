@@ -20,6 +20,8 @@ elseif(ENABLE_SHARED)
     list(APPEND TESTER_LIBS toolkit)
 endif()
 
+# add_definitions("-D_GLIBCXX_USE_CXX11_ABI=0")
+
 if(EXPORT_SORTS)
     add_subdirectory(sorts)
 endif()
