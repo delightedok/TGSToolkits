@@ -13,7 +13,8 @@ string SortStatistic::get_statistic(void)
     string ret("");
     ret += "Allocs: " + to_string(this->mNAllocs) + " ";
     ret += "Exchanges: " + to_string(this->mNExchanges) + " ";
-    ret += "Compares: " + to_string(this->mNCompares);
+    ret += "Compares: " + to_string(this->mNCompares) + " ";
+    ret += "Copys: " + to_string(this->mNCopys);
     return ret;
 }
 
@@ -22,11 +23,17 @@ void SortStatistic::reset(void)
     this->mNExchanges = 0;
     this->mNAllocs = 0;
     this->mNCompares = 0;
+    this->mNCopys = 0;
 }
 
 void SortStatistic::addExchange(void)
 {
     this->mNExchanges++;
+}
+
+void SortStatistic::addCopy(void)
+{
+    this->mNCopys++;
 }
 
 void SortStatistic::addAlloc(void)
@@ -58,6 +65,12 @@ int SortObject::onExchange(void * obj1, void * obj2)
     this->mStatistic.addExchange();
     ret = this->mVTable.onExchange(obj1, obj2);
     return ret;
+}
+
+void SortObject::onCopy(void * dst, void * src)
+{
+    this->mStatistic.addCopy();
+    this->mVTable.onCopy(dst, src);
 }
 
 void * SortObject::onDuplicate(void * obj)

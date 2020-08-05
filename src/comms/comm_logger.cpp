@@ -104,7 +104,7 @@ void CommLoggerObject::vlogout(int level, const char * fmt, va_list ap)
 
     if (emCommLoggerStd & this->mType)
     {
-        fprintf(stderr, COMM_LOGGER_TIME_FORMAT "%s", COMM_LOGGER_TIME_ARGS(T), vbuf);
+        fprintf(stderr, COMM_LOGGER_TIME_FORMAT "%s\n", COMM_LOGGER_TIME_ARGS(T), vbuf);
     }
 
     if ((emCommLoggerFile & this->mType))
@@ -113,7 +113,7 @@ void CommLoggerObject::vlogout(int level, const char * fmt, va_list ap)
         COMM_LOCK(this->mLocker2);
         if (this->mFp)
         {
-            fprintf(mFp, COMM_LOGGER_TIME_FORMAT "%s", COMM_LOGGER_TIME_ARGS(T), vbuf);
+            fprintf(mFp, COMM_LOGGER_TIME_FORMAT "%s\n", COMM_LOGGER_TIME_ARGS(T), vbuf);
             this->mNlines++;
             if (this->mNlines >= 50)  // when logging out 50 lines, force sync
             {

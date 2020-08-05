@@ -15,6 +15,8 @@ TGSTK_EXPORT int SortGnomeObject::sort(void * objs, int elemSize, int size, Sort
     int i = 0;
     int rc = 0;
 
+    SortObject::sort(objs, elemSize, size, type);
+
     for (i = 1; i < size && !ret;)
     {
         rc = this->onCompare(COMM_ARRAY_ELEM(objs, elemSize, i - 1), COMM_ARRAY_ELEM(objs, elemSize, i));

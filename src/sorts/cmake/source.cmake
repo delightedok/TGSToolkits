@@ -3,6 +3,7 @@ set(_TGSTK_SORTS_SOURCE_FILES_CPP
     BubbleSort/bubble_sort.cpp
     CocktailShakerSort/cocktail_shaker_sort.cpp
     GnomeSort/gnome_sort.cpp
+    OptimizedGnomeSort/optimized_gnome_sort.cpp
 )
 
 set(TGSTK_SORTS_SOURCE_FILES_CPP )
