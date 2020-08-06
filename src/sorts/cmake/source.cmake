@@ -5,6 +5,7 @@ set(_TGSTK_SORTS_SOURCE_FILES_CPP
     GnomeSort/gnome_sort.cpp
     OptimizedGnomeSort/optimized_gnome_sort.cpp
     OddEvenSort/odd_even_sort.cpp
+    CombSort/comb_sort.cpp
 )
 
 set(TGSTK_SORTS_SOURCE_FILES_CPP )

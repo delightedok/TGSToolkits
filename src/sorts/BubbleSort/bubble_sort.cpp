@@ -14,7 +14,6 @@ int SortBubbleObject::onSort(void * objs, int elemSize, int size, SortType type)
     int ret = 0;
     int i = 0, j = 0;
     int rc = 0;
-    SortObject::sort(objs, elemSize, size, type);
     for (i = 1; i < size && !ret; i++)
     {
         for (j = 1; j < size - i + 1 && !ret; j++)

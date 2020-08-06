@@ -16,8 +16,6 @@ TGSTK_DEPRECATED int SortOptimizedGnomeObject::onSort1(void * objs, int elemSize
     int rc = 0;
     int lastPos = -1;
 
-    SortObject::sort(objs, elemSize, size, type);
-
     for (i = 1; i < size && !ret;)
     {
         rc = this->onCompare(COMM_ARRAY_ELEM(objs, elemSize, i - 1), COMM_ARRAY_ELEM(objs, elemSize, i));
@@ -102,8 +100,6 @@ int SortOptimizedGnomeObject::onSort(void * objs, int elemSize, int size, SortTy
     int beenBack = 0;
     int lastPos = -1;
     void * _obj = NULL;
-
-    SortObject::sort(objs, elemSize, size, type);
 
     do {
         if (1 == size)

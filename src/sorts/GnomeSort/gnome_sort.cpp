@@ -15,8 +15,6 @@ int SortGnomeObject::onSort(void * objs, int elemSize, int size, SortType type)
     int i = 0;
     int rc = 0;
 
-    SortObject::sort(objs, elemSize, size, type);
-
     for (i = 1; i < size && !ret;)
     {
         rc = this->onCompare(COMM_ARRAY_ELEM(objs, elemSize, i - 1), COMM_ARRAY_ELEM(objs, elemSize, i));

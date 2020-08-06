@@ -14,7 +14,6 @@ int SortCocktailShakerObject::onSort(void * objs, int elemSize, int size, SortTy
     int ret = 0;
     int i = 0, j = 0;
     int rc = 0;
-    SortObject::sort(objs, elemSize, size, type);
     for (i = 1; i < size && !ret; i++)
     {
         if (i % 2)  // odd
