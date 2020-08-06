@@ -3,6 +3,7 @@ set(_TGSTK_COMMS_HEADER_FILES_H
     cocktail_shaker_sort.h
     gnome_sort.h
     optimized_gnome_sort.h
+    odd_even_sort.h
 )
 
 set(TGSTK_COMMS_HEADER_FILES_H )
