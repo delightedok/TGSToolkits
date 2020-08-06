@@ -7,7 +7,7 @@
 TGSTK_EXPORT SortBubbleObject::SortBubbleObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-TGSTK_EXPORT int SortBubbleObject::sort(void * objs, int elemSize, int size, SortType type)
+int SortBubbleObject::onSort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 

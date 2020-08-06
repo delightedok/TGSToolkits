@@ -86,10 +86,15 @@ void SortObject::onFree(void * obj)
     this->mVTable.onFree(obj);
 }
 
-int SortObject::sort(void * objs, int elemSize, int size, SortType type)
+int SortObject::onSort(void * objs, int elemSize, int size, SortType type)
+{
+    return 0;
+}
+
+TGSTK_EXPORT int SortObject::sort(void * objs, int elemSize, int size, SortType type)
 {
     this->mStatistic.reset();
-    return 0;
+    return this->onSort(objs, elemSize, size, type);
 }
 
 TGSTK_EXPORT string SortObject::get_statistic(void)

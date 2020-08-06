@@ -5,4 +5,8 @@
 #define TGSTK_EXPORT __attribute__((visibility("default")))
 #endif
 
+// #ifndef TGSTK_DEPRECATED
+#define TGSTK_DEPRECATED __attribute__((deprecated))
+// #endif
+
 #endif

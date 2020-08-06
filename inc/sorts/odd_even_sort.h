@@ -8,9 +8,9 @@ class SortOddEvenObject : public SortObject
 {
 public:
     TGSTK_EXPORT SortOddEvenObject(SortVTable & vTable);
-    TGSTK_EXPORT int sort(void * objs, int elemSize, int size, SortType type);
 private:
 protected:
+    int onSort(void * objs, int elemSize, int size, SortType type);
 };
 
 #endif

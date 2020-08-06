@@ -48,8 +48,6 @@ int main(int argc, char * args[])
     unsigned int i = 0;
     int a[10] = {8, 7, 4, 9, 6, 2, 5, 7, 0, 8};
     int b[10] = {8, 7, 4, 9, 6, 2, 5, 7, 0, 8};
-    int c[10] = {8, 7, 4, 9, 6, 2, 5, 7, 0, 8};
-    int d[10] = {8, 7, 4, 9, 6, 2, 5, 7, 0, 8};
 
     SortVTable vTable;
     vTable.onCompare = tester_optimized_gnome_sorts_on_compare;
@@ -86,21 +84,6 @@ int main(int argc, char * args[])
     tester_logd(LOG_TAG, THIS_FILE, "Statistic: %s", obj.get_statistic().c_str());
     tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
 
-    obj.sort2(c, sizeof(c[0]), sizeof(c) / sizeof(c[0]), emSortAsc);
-    for (i = 0; i < sizeof(c) / sizeof(c[0]); i++)
-    {
-        tester_logd(LOG_TAG, THIS_FILE, "c[%d]: %d", i, c[i]);
-    }
-    tester_logd(LOG_TAG, THIS_FILE, "Statistic: %s", obj.get_statistic().c_str());
-    tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
-
-    obj.sort2(d, sizeof(d[0]), sizeof(d) / sizeof(d[0]), emSortDesc);
-    for (i = 0; i < sizeof(d) / sizeof(d[0]); i++)
-    {
-        tester_logd(LOG_TAG, THIS_FILE, "d[%d]: %d", i, d[i]);
-    }
-    tester_logd(LOG_TAG, THIS_FILE, "Statistic: %s", obj.get_statistic().c_str());
-    tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
     return 0;
 }
 

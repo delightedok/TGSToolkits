@@ -7,7 +7,7 @@
 TGSTK_EXPORT SortGnomeObject::SortGnomeObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-TGSTK_EXPORT int SortGnomeObject::sort(void * objs, int elemSize, int size, SortType type)
+int SortGnomeObject::onSort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 

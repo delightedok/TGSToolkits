@@ -7,7 +7,7 @@
 TGSTK_EXPORT SortCocktailShakerObject::SortCocktailShakerObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-TGSTK_EXPORT int SortCocktailShakerObject::sort(void * objs, int elemSize, int size, SortType type)
+int SortCocktailShakerObject::onSort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 

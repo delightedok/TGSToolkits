@@ -8,9 +8,9 @@ class SortCocktailShakerObject : public SortObject
 {
 public:
     TGSTK_EXPORT SortCocktailShakerObject(SortVTable & vTable);
-    TGSTK_EXPORT int sort(void * objs, int elemSize, int size, SortType type);
 private:
 protected:
+    int onSort(void * objs, int elemSize, int size, SortType type);
 };
 
 #endif

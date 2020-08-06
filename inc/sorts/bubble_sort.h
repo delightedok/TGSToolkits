@@ -8,9 +8,9 @@ class SortBubbleObject : public SortObject
 {
 public:
     TGSTK_EXPORT SortBubbleObject(SortVTable & vTable);
-    TGSTK_EXPORT int sort(void * objs, int elemSize, int size, SortType type);
 private:
 protected:
+    int onSort(void * objs, int elemSize, int size, SortType type);
 };
 
 #endif

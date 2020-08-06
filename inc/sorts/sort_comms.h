@@ -43,7 +43,7 @@ enum SortType
 class SortObject
 {
 public:
-    virtual int sort(void * objs, int elemSize, int size, SortType type);
+    TGSTK_EXPORT int sort(void * objs, int elemSize, int size, SortType type);
     TGSTK_EXPORT std::string get_statistic(void);  // Get the display string of statistic
 protected:
     SortObject(SortVTable & vTable);
@@ -52,6 +52,7 @@ protected:
     void onCopy(void * dst, void * src);
     void * onDuplicate(void * obj);
     void onFree(void * obj);
+    virtual int onSort(void * objs, int elemSize, int size, SortType type);
 private:
     SortStatistic mStatistic;
     SortVTable mVTable;

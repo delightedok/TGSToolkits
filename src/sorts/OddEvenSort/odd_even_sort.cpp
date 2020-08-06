@@ -7,7 +7,7 @@
 TGSTK_EXPORT SortOddEvenObject::SortOddEvenObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-TGSTK_EXPORT int SortOddEvenObject::sort(void * objs, int elemSize, int size, SortType type)
+int SortOddEvenObject::onSort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 

@@ -7,7 +7,7 @@
 TGSTK_EXPORT SortOptimizedGnomeObject::SortOptimizedGnomeObject(SortVTable & vTable) : SortObject(vTable)
 {}
 
-TGSTK_EXPORT int SortOptimizedGnomeObject::sort(void * objs, int elemSize, int size, SortType type)
+TGSTK_DEPRECATED int SortOptimizedGnomeObject::onSort1(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 
@@ -92,7 +92,7 @@ TGSTK_EXPORT int SortOptimizedGnomeObject::sort(void * objs, int elemSize, int s
     return ret;
 }
 
-TGSTK_EXPORT int SortOptimizedGnomeObject::sort2(void * objs, int elemSize, int size, SortType type)
+int SortOptimizedGnomeObject::onSort(void * objs, int elemSize, int size, SortType type)
 {
     COMM_ASSERT_RETURN(objs && size > 0, -1);
 
