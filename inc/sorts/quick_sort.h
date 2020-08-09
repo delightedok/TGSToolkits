@@ -9,7 +9,7 @@ class SortQuickObject : public SortObject
 public:
     TGSTK_EXPORT SortQuickObject(SortVTable & vTable);
 private:
-    int _sort(void * objs, int elemSize, int size, SortType type, int begin, int end);
+    int _sort(void * objs, int elemSize, int size, SortType type, int begin, int end, void * tempObj);
 protected:
     int onSort(void * objs, int elemSize, int size, SortType type);
 };
