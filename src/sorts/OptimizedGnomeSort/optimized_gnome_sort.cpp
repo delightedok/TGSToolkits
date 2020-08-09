@@ -180,6 +180,7 @@ int SortOptimizedGnomeObject::onSort(void * objs, int elemSize, int size, SortTy
                     break;
             }
         }
+        this->onFree(_obj);
     } while (0);
     return ret;
 }

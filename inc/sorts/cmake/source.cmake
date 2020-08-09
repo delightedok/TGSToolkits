@@ -5,6 +5,7 @@ set(_TGSTK_COMMS_HEADER_FILES_H
     optimized_gnome_sort.h
     odd_even_sort.h
     comb_sort.h
+    quick_sort.h
 )
 
 set(TGSTK_COMMS_HEADER_FILES_H )
