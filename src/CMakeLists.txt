@@ -3,6 +3,7 @@ use_c99()
 add_compile_options("-funwind-tables")
 
 include(./comms/cmake/source.cmake)
+include(./iters/cmake/source.cmake)
 
 if(EXPORT_SORTS)
     include(./sorts/cmake/source.cmake)
@@ -10,6 +11,7 @@ endif()
 
 set(TGSTK_SOURCE_FILES_CPP
     ${TGSTK_COMMS_SOURCE_FILES_CPP}
+    ${TGSTK_ITERS_SOURCE_FILES_CPP}
     ${TGSTK_SORTS_SOURCE_FILES_CPP}
 )
 

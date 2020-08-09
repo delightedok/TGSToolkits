@@ -1,3 +1,5 @@
+include(./iters/cmake/source.cmake)
+
 if(EXPORT_SORTS)
     include(./sorts/cmake/source.cmake)
 endif()
@@ -5,6 +7,8 @@ endif()
 set(TGSTK_HEADER_FILES_H
     tgstk_comms.h
     ${TGSTK_COMMS_HEADER_FILES_H}
+    ${TGSTK_ITERS_HEADER_FILES_H}
+    ${TGSTK_SORTS_HEADER_FILES_H}
 )
 
 install(FILES ${TGSTK_HEADER_FILES_H}

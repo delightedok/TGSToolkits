@@ -1,6 +1,7 @@
 #ifndef __SORT_SORT_COMMS_H_
 #define __SORT_SORT_COMMS_H_
 
+#include <tgstk_comms.h>
 #include <string>
 
 typedef int (* Func_sort1)(void * obj1, void * obj2);
