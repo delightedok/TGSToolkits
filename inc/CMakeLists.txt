@@ -1,3 +1,4 @@
+include(./comms/cmake/source.cmake)
 include(./iters/cmake/source.cmake)
 
 if(EXPORT_SORTS)

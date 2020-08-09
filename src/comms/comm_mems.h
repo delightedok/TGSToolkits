@@ -10,7 +10,7 @@ void _comm_mems_free(void ** p);
 #endif
 
 #ifndef mfree
-#define mfree(p) _comm_mems_free(&(p))
+#define mfree(p) _comm_mems_free((void **)&(p))
 #endif
 
 #endif
