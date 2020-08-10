@@ -6,6 +6,7 @@ set(_TGSTK_SORTS_HEADER_FILES_H
     odd_even_sort.h
     comb_sort.h
     quick_sort.h
+    stable_quick_sort.h
 )
 
 set(TGSTK_SORTS_HEADER_FILES_H )

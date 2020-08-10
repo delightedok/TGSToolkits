@@ -22,6 +22,11 @@ ListObject::ListObject(ListVTable & mVTable)
     COMM_ASSIGN_IF(this->mVTable.onFree, iters_list_on_free_default, !mVTable.onFree);
 }
 
+TGSTK_EXPORT int ListObject::size(void)
+{
+    return this->mNdatas;
+}
+
 void * ListObject::doDuplicate(void * obj)
 {
     return this->mVTable.onDuplicate(obj);

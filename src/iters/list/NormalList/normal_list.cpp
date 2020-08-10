@@ -51,6 +51,7 @@ TGSTK_EXPORT int NormalListObject::rpush(void * obj, int size)
         pNode->prev = mDatas.prev;
         mDatas.prev->next = pNode;
         mDatas.prev = pNode;
+        mNdatas++;
         ret = 0;
     } while (0);
     return ret;
@@ -72,6 +73,7 @@ TGSTK_EXPORT int NormalListObject::lpush(void * obj, int size)
         pNode->prev = &mDatas;
         mDatas.next->prev = pNode;
         mDatas.next = pNode;
+        mNdatas++;
         ret = 0;
     } while (0);
     return ret;
@@ -84,10 +86,12 @@ TGSTK_EXPORT void * NormalListObject::rpop(void)
         ListNode * pNode = mDatas.prev;
         if (pNode == &mDatas)  // there is NO data in list
         {
+            mNdatas = 0;  // to ensure the <field>mNdatas</field> is correct
             break;
         }
         pNode->prev->next = &mDatas;
         mDatas.prev = pNode->prev;
+        mNdatas--;
         ret = pNode->ptr.ptr;
         mfree(pNode);
     } while (0);
@@ -101,13 +105,25 @@ TGSTK_EXPORT void * NormalListObject::lpop(void)
         ListNode * pNode = mDatas.next;
         if (pNode == &mDatas)  // there is NO data in list
         {
+            mNdatas = 0;  // to ensure the <field>mNdatas</field> is correct
             break;
         }
         pNode->next->prev = &mDatas;
         mDatas.next = pNode->next;
+        mNdatas--;
         ret = pNode->ptr.ptr;
         mfree(pNode);
     } while (0);
     return ret;
+}
+
+TGSTK_EXPORT int NormalListObject::clear(void)
+{
+    while (this->mNdatas > 0)
+    {
+        void * data = this->rpop();
+        this->doFree(data);
+    }
+    return 0;
 }
 

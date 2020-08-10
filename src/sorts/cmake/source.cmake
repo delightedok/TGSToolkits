@@ -7,6 +7,7 @@ set(_TGSTK_SORTS_SOURCE_FILES_CPP
     OddEvenSort/odd_even_sort.cpp
     CombSort/comb_sort.cpp
     QuickSort/quick_sort.cpp
+    StableQuickSort/stable_quick_sort.cpp
 )
 
 set(TGSTK_SORTS_SOURCE_FILES_CPP )

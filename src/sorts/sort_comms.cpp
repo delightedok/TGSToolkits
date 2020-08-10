@@ -91,6 +91,11 @@ int SortObject::onSort(void * objs, int elemSize, int size, SortType type)
     return 0;
 }
 
+SortVTable & SortObject::get_vtable(void)
+{
+    return this->mVTable;
+}
+
 TGSTK_EXPORT int SortObject::sort(void * objs, int elemSize, int size, SortType type)
 {
     this->mStatistic.reset();

@@ -54,6 +54,7 @@ protected:
     void * onDuplicate(void * obj);
     void onFree(void * obj);
     virtual int onSort(void * objs, int elemSize, int size, SortType type);
+    SortVTable & get_vtable(void);
 private:
     SortStatistic mStatistic;
     SortVTable mVTable;

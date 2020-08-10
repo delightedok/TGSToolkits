@@ -31,6 +31,8 @@ public:
     virtual int lpush(void * obj, int size) = 0;
     virtual void * rpop(void) = 0;
     virtual void * lpop(void) = 0;
+    virtual int clear(void) = 0;
+    TGSTK_EXPORT virtual int size(void);
 protected:
     void * doDuplicate(void * obj);
     void doFree(void * obj);

@@ -17,6 +17,7 @@ public:
     TGSTK_EXPORT int lpush(void * obj, int size);
     TGSTK_EXPORT void * rpop(void);
     TGSTK_EXPORT void * lpop(void);
+    TGSTK_EXPORT int clear(void);
 private:
 protected:
 };
