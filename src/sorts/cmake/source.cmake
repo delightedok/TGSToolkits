@@ -8,6 +8,7 @@ set(_TGSTK_SORTS_SOURCE_FILES_CPP
     CombSort/comb_sort.cpp
     QuickSort/quick_sort.cpp
     StableQuickSort/stable_quick_sort.cpp
+    DualPivotQuickSort/dual_pivot_quick_sort.cpp
 )
 
 set(TGSTK_SORTS_SOURCE_FILES_CPP )

@@ -26,7 +26,7 @@ int SortQuickObject::_sort(void * objs, int elemSize, int size, SortType type, i
             base = this->onDuplicate(COMM_ARRAY_ELEM(objs, elemSize, i));
             if (!base)
             {
-                mlog_e(LOG_TAG, THIS_FILE, "Failed to duplicate element[0].");
+                mlog_e(LOG_TAG, THIS_FILE, "Failed to duplicate element[%d].", i);
                 ret = -1;
                 break;
             }

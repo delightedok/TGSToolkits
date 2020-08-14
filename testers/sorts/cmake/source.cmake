@@ -7,6 +7,7 @@ set(_TESTER_SORTS_SOURCE_FILES_CPP
     tester_comb_sorts.cpp
     tester_quick_sorts.cpp
     tester_stable_quick_sorts.cpp
+    tester_dual_pivot_quick_sorts.cpp
 )
 
 set(TESTER_SORTS_SOURCE_FILES_CPP ${_TESTER_SORTS_SOURCE_FILES_CPP})
