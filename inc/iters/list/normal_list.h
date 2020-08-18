@@ -12,6 +12,7 @@ class NormalListObject: public ListObject
 {
 public:
     TGSTK_EXPORT NormalListObject(ListVTable & mVTable);
+    TGSTK_EXPORT ~NormalListObject(void);
     TGSTK_EXPORT int iterate(Func_itersListOnIterate onIter, void * arg, int unwind = 0);
     TGSTK_EXPORT int rpush(void * obj, int size);
     TGSTK_EXPORT int lpush(void * obj, int size);

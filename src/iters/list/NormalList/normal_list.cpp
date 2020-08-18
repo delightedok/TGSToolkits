@@ -11,6 +11,11 @@ TGSTK_EXPORT NormalListObject::NormalListObject(ListVTable & mVTable): ListObjec
     this->mDatas.prev = &this->mDatas;
 }
 
+TGSTK_EXPORT NormalListObject::~NormalListObject(void)
+{
+    this->clear();
+}
+
 TGSTK_EXPORT int NormalListObject::iterate(Func_itersListOnIterate onIter, void * arg, int unwind)
 {
     int ret = 0;

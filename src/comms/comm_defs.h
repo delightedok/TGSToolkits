@@ -19,12 +19,20 @@
 #define COMM_ARRAY_ELEM(array, elemSize, i) (((char *)(array)) + (elemSize) * (i))
 #endif
 
+#ifndef COMM_ARRAY_SIZE
+#define COMM_ARRAY_SIZE(array, type) (sizeof(array) / sizeof(type))
+#endif
+
 #ifndef COMM_ASSIGN_IF
 #define COMM_ASSIGN_IF(dst, src, cond) do { if (cond) dst = src; } while (0)
 #endif
 
 #ifndef COMM_UNUSED
 #define COMM_UNUSED(param) (void)(param)
+#endif
+
+#ifndef COMM_MAKE_OFFSET
+#define COMM_MAKE_OFFSET(p, offset) ((void *)(((char *)(p)) + (offset)))
 #endif
 
 #endif

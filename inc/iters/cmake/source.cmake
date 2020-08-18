@@ -2,6 +2,7 @@ include(./iters/list/cmake/source.cmake)
 
 set(_TGSTK_ITERS_HEADER_FILES_H
     ${TGSTK_ITERS_LIST_HEADER_FILES_H}
+    ${TGSTK_ITERS_TREE_HEADER_FILES_H}
 )
 
 set(TGSTK_ITERS_HEADER_FILES_H )

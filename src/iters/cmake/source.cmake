@@ -1,7 +1,9 @@
 include(./iters/list/cmake/source.cmake)
+include(./iters/tree/cmake/source.cmake)
 
 set(_TGSTK_ITERS_SOURCE_FILES_CPP
     ${TGSTK_ITERS_LIST_SOURCE_FILES_CPP}
+    ${TGSTK_ITERS_TREE_SOURCE_FILES_CPP}
 )
 
 set(TGSTK_ITERS_SOURCE_FILES_CPP )

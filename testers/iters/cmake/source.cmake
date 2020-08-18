@@ -1,5 +1,6 @@
 set(_TESTER_ITERS_SOURCE_FILES_CPP
     tester_normal_list.cpp
+    tester_btree.cpp
 )
 
 set(TESTER_ITERS_SOURCE_FILES_CPP ${_TESTER_ITERS_SOURCE_FILES_CPP})
