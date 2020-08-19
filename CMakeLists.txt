@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.0)
-project(TGSToolkits VERSION 1.0.0 LANGUAGES C CXX)
+project(TGSToolkits VERSION 1.0.0 LANGUAGES CXX)
 
 # Basic Information.
 MESSAGE(STATUS "CMake version: " ${CMAKE_VERSION})
