@@ -28,14 +28,14 @@ static int iters_tree_on_compare_default(void * obj1, void * obj2)
 static void * iters_tree_on_duplicate_node(void * obj)
 {
     void * ret = NULL;
-    TreeNodeDesc * src = NULL;
+    TreeNode * src = NULL;
     do {
-        src = (TreeNodeDesc *)obj;
+        src = (TreeNode *)obj;
         if (!src)
         {
             break;
         }
-        ret = mmalloc(sizeof(TreeNodeDesc));
+        ret = mmalloc(sizeof(TreeNode));
         if (!ret)
         {
             mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for TreeNode!");
@@ -59,7 +59,6 @@ TreeObject::TreeObject(TreeVTable & vtable, unsigned int nchildren)
     COMM_ASSIGN_IF(this->mVTable.onDuplicate, iters_tree_on_duplicate_default, !mVTable.onDuplicate);
     COMM_ASSIGN_IF(this->mVTable.onFree, iters_tree_on_free_default, !mVTable.onFree);
     COMM_ASSIGN_IF(this->mVTable.onCompare, iters_tree_on_compare_default, !mVTable.onCompare);
-    this->mNChildren = nchildren;
 }
 
 TGSTK_EXPORT int TreeObject::size(void)
@@ -110,36 +109,11 @@ int TreeObject::doCompare(void * obj1, void * obj2)
     return this->mVTable.onCompare(obj1, obj2);
 }
 
-TreeNode * TreeObject::new_node(void)
-{
-    TreeNode * ret = NULL;
-    unsigned int i = 0;
-    do {
-        ret = (TreeNode *)mmalloc((unsigned int)(sizeof(TreeNode) + 8 + sizeof(TreeNode *) * this->mNChildren));
-        if (!ret)
-        {
-            mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for TreeNode and that for its fields");
-            break;
-        }
-        ret->childs = (TreeNode **)COMM_MAKE_OFFSET(ret, sizeof(TreeNode) + 8);
-        for (i = 0; i < this->mNChildren; i++)
-        {
-            ret->childs[i] = NULL;
-        }
-    } while (0);
-    return ret;
-}
-
-void TreeObject::del_node(TreeNode * node)
-{
-    mfree(node);
-}
-
 int TreeObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, void * arg)
 {
     int ret = 0;
-    unsigned int i = 0;
     TreeNode * node = NULL;
+    TreeNode * p = NULL;
 
     do {
         /* Find a NOT NULL Node */
@@ -152,9 +126,11 @@ int TreeObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, 
             break;
         }
 
-        for (i = 0; i < this->mNChildren && !ret; i++)  // push children into the list
+        p = node->child;
+        while (NULL != p)
         {
-            list.rpush(node->childs[i], sizeof(TreeNode *));
+            list.rpush(p, sizeof(TreeNode *));
+            p = p->sibling;
         }
 
         ret = onIterate(node->ptr.ptr, arg);
@@ -177,7 +153,7 @@ int TreeObject::iterate_dfs(TreeNode * root, Func_itersTree3 onIterate, void * a
     COMM_ASSERT_RETURN(root, 0);
 
     int ret = 0;
-    unsigned int i = 0;
+    TreeNode * p = NULL;
     do {
         ret = onIterate(root->ptr.ptr, arg);
         if (ret)  // Failed to handle the Data in Node
@@ -185,9 +161,11 @@ int TreeObject::iterate_dfs(TreeNode * root, Func_itersTree3 onIterate, void * a
             break;
         }
 
-        for (i = 0; i < this->mNChildren && !ret; i++)
+        p = root->child;
+        while (NULL != p && !ret)
         {
-            ret = this->iterate_dfs(root->childs[i], onIterate, arg);
+            ret = this->iterate_dfs(p, onIterate, arg);
+            p = p->sibling;
         }
     } while (0);
     return ret;

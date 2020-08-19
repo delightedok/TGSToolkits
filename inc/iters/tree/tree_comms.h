@@ -16,7 +16,9 @@ typedef int (* Func_itersTree4)(void * obj1, void * obj2);
 struct TreeNode
 {
     PointerT ptr;
-    TreeNode ** childs;
+    TreeNode * parent;
+    TreeNode * sibling;
+    TreeNode * child;
 };
 
 
@@ -49,17 +51,13 @@ protected:
     void * doDuplicate(void * obj);
     void doFree(void * obj);
     int doCompare(void * obj1, void * obj2);
-    virtual TreeNode * new_node(void);
-    virtual void del_node(TreeNode * node);
-private:
-    int iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, void * arg);
-    int iterate_dfs(TreeNode * root, Func_itersTree3 onIterate, void * arg);
+    virtual int iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, void * arg);
+    virtual int iterate_dfs(TreeNode * root, Func_itersTree3 onIterate, void * arg);
 private:
     TreeVTable mVTable;
 protected:
     TreeNode * mDatas;
     unsigned int mSize;
-    unsigned int mNChildren;
 };
 
 
