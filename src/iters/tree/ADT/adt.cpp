@@ -1,53 +1,53 @@
 #include "../../../comms/comm_headers.h"
-#include <iters/tree/btree.h>
+#include <iters/tree/adt.h>
 
-#define THIS_FILE "btree.cpp"
-#define LOG_TAG "ITERS-TREE-BTREE"
+#define THIS_FILE "adt.cpp"
+#define LOG_TAG "ITERS-TREE-ADT"
 
-TGSTK_EXPORT BTreeObject::BTreeObject(TreeVTable & vtable) : TreeObject(vtable, 2)
+TGSTK_EXPORT ADTObject::ADTObject(TreeVTable & vtable) : TreeObject(vtable, 2)
 {
     this->mDatas = NULL;
 }
 
-BTreeNode * BTreeObject::make_node(void)
+ADTNode * ADTObject::make_node(void)
 {
-    BTreeNode * ret = NULL;
+    ADTNode * ret = NULL;
     do {
-        ret = (BTreeNode *)mmalloc(sizeof(BTreeNode));
+        ret = (ADTNode *)mmalloc(sizeof(ADTNode));
         if (!ret)
         {
-            mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for BTreeNode.");
+            mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for ADTNode.");
             break;
         }
-        memset(ret, 0, sizeof(BTreeNode));
+        memset(ret, 0, sizeof(ADTNode));
     } while (0);
     return ret;
 }
 
-void BTreeObject::del_node(BTreeNode * node)
+void ADTObject::del_node(ADTNode * node)
 {
     mfree(node);
 }
 
-TGSTK_EXPORT int BTreeObject::push(void  * data, unsigned int size)
+TGSTK_EXPORT int ADTObject::push(void  * data, unsigned int size)
 {
     return this->push(&this->mDatas, data, size);
 }
 
-int BTreeObject::push(BTreeNode ** root, void  * data, unsigned int size)
+int ADTObject::push(ADTNode ** root, void  * data, unsigned int size)
 {
     COMM_ASSERT_RETURN(root, -1);
 
     int ret = -1;
     int rc = 0;
-    BTreeNode * _root = *root;
+    ADTNode * _root = *root;
     do {
         if (!_root)
         {
-            BTreeNode * node = this->make_node();
+            ADTNode * node = this->make_node();
             if (!node)
             {
-                mlog_e(LOG_TAG, THIS_FILE, "Failed to create a BTree Node.");
+                mlog_e(LOG_TAG, THIS_FILE, "Failed to create a ADT Node.");
                 break;
             }
             node->ptr.ptr = this->doDuplicate(data);
@@ -68,43 +68,43 @@ int BTreeObject::push(BTreeNode ** root, void  * data, unsigned int size)
     return ret;
 }
 
-TGSTK_EXPORT void * BTreeObject::pop(int pos)
+TGSTK_EXPORT void * ADTObject::pop(int pos)
 {
     return NULL;
 }
 
-TGSTK_EXPORT void * BTreeObject::pop(void * obj)
+TGSTK_EXPORT void * ADTObject::pop(void * obj)
 {
     return NULL;
 }
 
-static void * iters_btree_on_duplicate_node(void * obj)
+static void * iters_adt_on_duplicate_node(void * obj)
 {
     void * ret = NULL;
-    BTreeNode * src = NULL;
+    ADTNode * src = NULL;
     do {
-        src = (BTreeNode *)obj;
+        src = (ADTNode *)obj;
         if (!src)
         {
             break;
         }
-        ret = mmalloc(sizeof(BTreeNode));
+        ret = mmalloc(sizeof(ADTNode));
         if (!ret)
         {
-            mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for BTreeNode!");
+            mlog_e(LOG_TAG, THIS_FILE, "Failed to alloc space for ADTNode!");
             break;
         }
-        memcpy(ret, obj, sizeof(BTreeNode));
+        memcpy(ret, obj, sizeof(ADTNode));
     } while (0);
     return ret;
 }
 
-static void iters_btree_on_free_node(void * obj)
+static void iters_adt_on_free_node(void * obj)
 {
     mfree(obj);
 }
 
-TGSTK_EXPORT int BTreeObject::iterate(Func_itersTree3 onIterate, void * arg,
+TGSTK_EXPORT int ADTObject::iterate(Func_itersTree3 onIterate, void * arg,
     TreeIterateMethod method)
 {
     COMM_ASSERT_RETURN(onIterate, -1);
@@ -114,9 +114,9 @@ TGSTK_EXPORT int BTreeObject::iterate(Func_itersTree3 onIterate, void * arg,
     {
         case emIterTreeIterMethodBFs:
             {
-                ListVTable vtable = { iters_btree_on_duplicate_node, iters_btree_on_free_node };
+                ListVTable vtable = { iters_adt_on_duplicate_node, iters_adt_on_free_node };
                 NormalListObject list(vtable);
-                list.rpush(this->mDatas, sizeof(BTreeNode *));
+                list.rpush(this->mDatas, sizeof(ADTNode *));
                 ret = this->iterate_bfs(list, onIterate, arg);
             }
             break;
@@ -132,15 +132,15 @@ TGSTK_EXPORT int BTreeObject::iterate(Func_itersTree3 onIterate, void * arg,
     return ret;
 }
 
-int BTreeObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, void * arg)
+int ADTObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate, void * arg)
 {
     int ret = 0;
-    BTreeNode * node = NULL;
+    ADTNode * node = NULL;
 
     do {
         /* Find a NOT NULL Node */
         do {
-            node = (BTreeNode *)list.lpop();
+            node = (ADTNode *)list.lpop();
         } while (list.size() > 0 && !node);
 
         if (!node)  // All Nodes in tree has been iterated
@@ -148,12 +148,12 @@ int BTreeObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate,
             break;
         }
 
-        list.rpush(node->childs[0], sizeof(BTreeNode *));
-        list.rpush(node->childs[1], sizeof(BTreeNode *));
+        list.rpush(node->childs[0], sizeof(ADTNode *));
+        list.rpush(node->childs[1], sizeof(ADTNode *));
 
         ret = onIterate(node->ptr.ptr, arg);
 
-        iters_btree_on_free_node(node);
+        iters_adt_on_free_node(node);
 
         if (ret)  // Failed to handle the Data in Node
         {
@@ -166,7 +166,7 @@ int BTreeObject::iterate_bfs(NormalListObject & list, Func_itersTree3 onIterate,
     return ret;
 }
 
-int BTreeObject::iterate_dfs(BTreeNode * root, Func_itersTree3 onIterate, void * arg)
+int ADTObject::iterate_dfs(ADTNode * root, Func_itersTree3 onIterate, void * arg)
 {
     COMM_ASSERT_RETURN(root, 0);
 

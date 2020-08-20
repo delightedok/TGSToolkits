@@ -1,6 +1,6 @@
 set(_TGSTK_ITERS_TREE_HEADER_FILES_H
     tree_comms.h
-    btree.h
+    adt.h
 )
 
 set(TGSTK_ITERS_TREE_HEADER_FILES_H )

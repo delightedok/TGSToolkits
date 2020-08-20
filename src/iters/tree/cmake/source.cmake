@@ -1,6 +1,6 @@
 set(_TGSTK_ITERS_TREE_SOURCE_FILES_CPP
     tree_comms.cpp
-    BTree/btree.cpp
+    ADT/adt.cpp
 )
 
 set(TGSTK_ITERS_TREE_SOURCE_FILES_CPP )
