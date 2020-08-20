@@ -42,8 +42,7 @@ class TreeObject
 public:
     TreeObject(TreeVTable & vtable, unsigned int nchildren);
     virtual int push(void  * data, unsigned int size) = 0;
-    virtual void * pop(int pos) = 0;
-    virtual void * pop(void * obj) = 0;
+    virtual void pop(void * obj) = 0;
     TGSTK_EXPORT virtual int size(void);
     TGSTK_EXPORT virtual int iterate(Func_itersTree3 onIterate, void * arg,
         TreeIterateMethod method = emIterTreeIterMethodBFs);

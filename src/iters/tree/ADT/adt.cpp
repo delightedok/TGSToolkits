@@ -59,23 +59,89 @@ int ADTObject::push(ADTNode ** root, void  * data, unsigned int size)
         rc = this->doCompare(_root->ptr.ptr, data);
         if (rc <= 0)
         {
-            ret = this->push(&_root->childs[0], data, size);
+            ret = this->push(&_root->childs[1], data, size);
         } else
         {
-            ret = this->push(&_root->childs[1], data, size);
+            ret = this->push(&_root->childs[0], data, size);
         }
     } while (0);
     return ret;
 }
 
-TGSTK_EXPORT void * ADTObject::pop(int pos)
+TGSTK_EXPORT void ADTObject::pop(void * obj)
 {
-    return NULL;
+    this->mDatas = this->pop(this->mDatas, obj);
 }
 
-TGSTK_EXPORT void * ADTObject::pop(void * obj)
+ADTNode * ADTObject::pop(ADTNode * root, void * obj)
 {
-    return NULL;
+    COMM_ASSERT_RETURN(root, NULL);
+
+    ADTNode * ret = root;
+    int rc = 0;
+    ADTNode * p = NULL;
+    if (NULL != root)
+    {
+        rc = this->doCompare(obj, root->ptr.ptr);
+        if (0 == rc)  // Find the Node
+        {
+            ADTNode * minNode = NULL;
+            ret = root;
+
+            if (root->childs[0] && root->childs[1])  // Has Left and Right Children
+            {
+                minNode = this->find_min_node(root->childs[1]);
+                COMM_ASSERT_RETURN(minNode, root);  // In fact, minNode is always NOT NULL
+                memcpy(&root->ptr, &minNode->ptr, sizeof(minNode->ptr));
+                root->childs[1] = this->pop(root->childs[1], minNode->ptr.ptr);  // Pop the Min Node in Right Child
+            } else  // Only have Left or Right Child
+            {
+                ret = root->childs[0] ? root->childs[0] : root->childs[1];
+                p = root;
+            }
+        } else if (rc > 0)  // Find the Node from the Right Child
+        {
+            root->childs[1] = this->pop(root->childs[1], obj);
+        } else if (rc < 0)  // Find the Node from the Left Child
+        {
+            root->childs[0] = this->pop(root->childs[0], obj);
+        }
+    }
+
+    /* Cleanning Up */
+    if (p)
+    {
+        this->doFree(p->ptr.ptr);
+        this->del_node(p);
+    }
+
+    return ret;
+}
+
+ADTNode * ADTObject::find_max_node(ADTNode * root)
+{
+    ADTNode * ret = root;
+    do {
+        if (NULL == root->childs[1])  // Does NOT have the Right Child, which means the root node is the max node
+        {
+            break;
+        }
+        ret = this->find_max_node(root->childs[1]);
+    } while (0);
+    return ret;
+}
+
+ADTNode * ADTObject::find_min_node(ADTNode * root)
+{
+    ADTNode * ret = root;
+    do {
+        if (NULL == root->childs[0])  // Does NOT have the Left Child, which means the root node is the min node
+        {
+            break;
+        }
+        ret = this->find_min_node(root->childs[1]);
+    } while (0);
+    return ret;
 }
 
 static void * iters_adt_on_duplicate_node(void * obj)
