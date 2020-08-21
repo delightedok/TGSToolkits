@@ -4,6 +4,7 @@ add_compile_options("-funwind-tables")
 
 include(./comms/cmake/source.cmake)
 include(./iters/cmake/source.cmake)
+include(./maths/cmake/source.cmake)
 
 if(EXPORT_SORTS)
     include(./sorts/cmake/source.cmake)
@@ -13,6 +14,7 @@ set(TGSTK_SOURCE_FILES_CPP
     ${TGSTK_COMMS_SOURCE_FILES_CPP}
     ${TGSTK_ITERS_SOURCE_FILES_CPP}
     ${TGSTK_SORTS_SOURCE_FILES_CPP}
+    ${TGSTK_MATHS_SOURCE_FILES_CPP}
 )
 
 set(TGSTK_LIBS

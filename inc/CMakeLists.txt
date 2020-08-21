@@ -1,5 +1,6 @@
 include(./comms/cmake/source.cmake)
 include(./iters/cmake/source.cmake)
+include(./maths/cmake/source.cmake)
 
 if(EXPORT_SORTS)
     include(./sorts/cmake/source.cmake)
@@ -10,6 +11,7 @@ set(TGSTK_HEADER_FILES_H
     ${TGSTK_COMMS_HEADER_FILES_H}
     ${TGSTK_ITERS_HEADER_FILES_H}
     ${TGSTK_SORTS_HEADER_FILES_H}
+    ${TGSTK_MATHS_HEADER_FILES_H}
 )
 
 install(FILES ${TGSTK_HEADER_FILES_H}

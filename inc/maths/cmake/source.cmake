@@ -1,0 +1,6 @@
+set(_TGSTK_MATHS_HEADER_FILES_H
+    maths.h
+)
+
+set(TGSTK_MATHS_HEADER_FILES_H )
+add_head_foreach(TGSTK_MATHS_HEADER_FILES_H "maths" ${_TGSTK_MATHS_HEADER_FILES_H})
