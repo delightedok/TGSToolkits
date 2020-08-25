@@ -67,13 +67,11 @@ int AVLObject::push(AVLNode ** root, void  * data, unsigned int size)
                 if (this->height(_root->childs[1]) - this->height(_root->childs[0]) >= 2)
                 {
                     rc = this->doCompare(data, _root->childs[1]->ptr.ptr);
-                    if (rc < 0)
+                    if (rc > 0)
                     {
-                        mlog_d(LOG_TAG, THIS_FILE, "L");
                         *root = this->rotate_L(_root);
                     } else
                     {
-                        mlog_d(LOG_TAG, THIS_FILE, "LR");
                         *root = this->rotate_LR(_root);
                     }
                 }
@@ -86,13 +84,11 @@ int AVLObject::push(AVLNode ** root, void  * data, unsigned int size)
                 if (this->height(_root->childs[0]) - this->height(_root->childs[1]) >= 2)
                 {
                     rc = this->doCompare(data, _root->childs[0]->ptr.ptr);
-                    if (rc > 0)
+                    if (rc < 0)
                     {
-                        mlog_d(LOG_TAG, THIS_FILE, "R");
                         *root = this->rotate_R(_root);
                     } else
                     {
-                        mlog_d(LOG_TAG, THIS_FILE, "RL");
                         *root = this->rotate_RL(_root);
                     }
                 }
@@ -188,7 +184,7 @@ AVLNode * AVLObject::find_min_node(AVLNode * root)
         {
             break;
         }
-        ret = this->find_min_node(root->childs[1]);
+        ret = this->find_min_node(root->childs[0]);
     } while (0);
     return ret;
 }
@@ -269,17 +265,23 @@ int AVLObject::iterate_dfs(AVLNode * root, Func_itersTree3 onIterate, void * arg
     COMM_ASSERT_RETURN(root, 0);
 
     int ret = 0;
-    unsigned int i = 0;
     do {
-        ret = onIterate(root->ptr.ptr, arg);
-        if (ret)  // Failed to handle the Data in Node
+        ret = this->iterate_dfs(root->childs[0], onIterate, arg);
+        if (ret)  // Failed to handle the Data in Left Child Node
         {
             break;
         }
 
-        for (i = 0; i < 2 && !ret; i++)
+        ret = onIterate(root->ptr.ptr, arg);
+        if (ret)  // Failed to handle the Data in Current Node
         {
-            ret = this->iterate_dfs(root->childs[i], onIterate, arg);
+            break;
+        }
+
+        ret = this->iterate_dfs(root->childs[1], onIterate, arg);
+        if (ret)  // Failed to handle the Data in Right Child Node
+        {
+            break;
         }
     } while (0);
     return ret;

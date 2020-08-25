@@ -43,7 +43,7 @@ int main(int argc, char * args[])
     obj1.iterate(tester_avl_on_iterate_1, NULL, emIterTreeIterMethodBFs);
     obj1.iterate(tester_avl_on_iterate_1, NULL, emIterTreeIterMethodDFs);
     tester_logd(LOG_TAG, THIS_FILE, "-------------------------------------------------");
-    for (int i = 0; i < 10; i += 2)
+    for (int i = 1; i < 10; i += 2)
     {
         tester_logd(LOG_TAG, THIS_FILE, "pop %d", i);
         obj1.pop((void *)(long)i);
